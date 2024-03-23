@@ -1,76 +1,70 @@
-
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-
     public static void main(String[] args) {
-       Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int respuesta;
-        System.out.println("Que operacion deseas realizar?");
-        System.out.printf("%n1.Sumar %n2. Restar %n3. Multiplicar %n4.Dividir %n5. Salir");
 
         do {
+            System.out.println("Qué operación deseas realizar?");
+            System.out.printf("%n1. Sumar %n2. Restar %n3. Multiplicar %n4. Dividir %n5. Salir%n");
+
             respuesta = sc.nextInt();
 
-            System.out.println ("Ingresa tu primer numero");
-            int a = sc.nextInt();
-            System.out.println ("Ingresa tu segundo numero");
-            int b = sc.nextInt();
+            if (respuesta == 5) {
+                System.out.println("Saliendo...");
+                break;
+            }
 
-           // float a = 10, b =20;
+            System.out.println("Ingresa tu primer número");
+            float a = sc.nextFloat();
+            System.out.println("Ingresa tu segundo número");
+            float b = sc.nextFloat();
 
             switch (respuesta) {
                 case 1:
-                    System.out.println("Respuesta: ");
-                    System.out.print (sumar(a, b));
+                    System.out.println("Respuesta: " + sumar(a, b));
                     break;
                 case 2:
-                    System.out.println("Respuesta: ");
-                    System.out.print (restar(a, b));
+                    System.out.println("Respuesta: " + restar(a, b));
                     break;
                 case 3:
-                    System.out.println("Respuesta: ");
-                    System.out.print (multiplicar(a, b));
+                    System.out.println("Respuesta: " + multiplicar(a, b));
                     break;
                 case 4:
-                    System.out.println("Respuesta: ");
-                    System.out.print (dividir(a, b));
+                    try {
+                        float resultado = dividir(a, b);
+                        System.out.println("Respuesta: " + resultado);
+                    } catch (ArithmeticException e) {
+                        System.out.println("Error: División por cero");
+                    }
                     break;
-
-                case 5:
-                    System.out.print("Saliendo");
-                    break;
-
-
-               default:
-                    System.out.print("opcion no valida");
+                default:
+                    System.out.println("Opción no válida");
                     break;
             }
 
-} while (respuesta !=5);
-
-        }
-
-        public static float sumar (float a, float b ) {
-             return a + b;
-        }
-        public static float multiplicar (float a, float b ){
-        return a * b;
-        }
-        public static float dividir (float a, float b) {
-        return a / b;
+        } while (respuesta != 5);
 
     }
-        public static float restar (float a, float b) {
+
+    public static float sumar(float a, float b) {
+        return a + b;
+    }
+
+    public static float multiplicar(float a, float b) {
+        return a * b;
+    }
+
+    public static float dividir(float a, float b) {
+        if (b == 0) {
+            throw new ArithmeticException("División por cero");
+        }
+        return a / b;
+    }
+
+    public static float restar(float a, float b) {
         return a - b;
     }
-
-
-
-
-
-    }
-
+}
